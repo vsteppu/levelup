@@ -8,7 +8,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
-import { registerAPI, userAPI, loginAPI } from './api'
+import { registerAPI, userAPI, loginAPI } from '../src/api.js/api'
 
 const name = ref('daniela')
 const email = ref('daniela@gmail.com')
