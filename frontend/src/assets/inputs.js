@@ -1,0 +1,1 @@
+export const regularInputs = 'px-2 py-1 bg-white w-full rounded appearance-none focus:outline-input-gray'

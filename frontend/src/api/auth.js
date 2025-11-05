@@ -1,6 +1,7 @@
 import axios from "axios";
 
 const api = '/api'
+//const api = import.meta.env.VITE_API_URL;
 
 const registerAPI = async (user) => {
     const response = await axios.post(`${api}/register`, user)

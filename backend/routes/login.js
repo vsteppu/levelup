@@ -9,7 +9,7 @@ router.post('/login', async (req, res) => {
 
     try {
         const existingUser = await User.findOne({ where: { email } });
-        
+
         if (!existingUser) {
             res.status(404).json({ message: 'Not found' })
             return
@@ -17,7 +17,6 @@ router.post('/login', async (req, res) => {
 
         const storedPasword = existingUser?.dataValues?.password
         
-
         bcrypt.compare(password, storedPasword, (err, result) => {
             if (err) throw err;
 
