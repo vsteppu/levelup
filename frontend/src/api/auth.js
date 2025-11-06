@@ -9,6 +9,7 @@ const registerAPI = async (user) => {
 }
 
 const loginAPI = async (user) => {
+    console.log('user: ', user);
     const response = await axios.post(`${api}/login`, user)
     return response?.data
 }
