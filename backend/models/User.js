@@ -1,34 +1,43 @@
-import { DataTypes } from 'sequelize';
-import sequelize from '../config/db.js';
+import { DataTypes } from "sequelize";
+import sequelize from "../config/db.js";
 
 const User = sequelize.define(
-  'User',
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
+    "User",
+    {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            primaryKey: true,
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        email: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true,
+        },
+        password: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
+        daily_exercise: {
+            type: DataTypes.JSON,
+            defaultValue: {
+                push_ups: 0,
+                sit_ups: 0,
+                squats: 0,
+                running: 0,
+            }
+        },
     },
-    name: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    tableName: 'users',
-    timestamps: true,
-    paranoid: true, // soft delete
-    underscored: true,
-  }
+    {
+        tableName: "users",
+        timestamps: true,
+        paranoid: true,
+        underscored: true,
+    }
 );
 
 export default User;

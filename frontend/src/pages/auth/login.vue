@@ -26,26 +26,33 @@
             </div>
             <button
                 @click="loginHandler()"
-                class="bg-blue-dark rounded px-3 py-1 mt-2 font-bold text-white"
+                class="bg-blue-dark rounded mt-2 font-bold text-white flex items-center justify-center"
             >
-                {{ loading ? "..." : "LOGIN" }}
+                <LoadingIcon 
+                    v-if="loading" 
+                    class="size-6 my-3"
+                />
+                <p v-else 
+                    class="my-3"
+                >
+                    LOGIN
+                </p>
             </button>
         </div>
     </div>
 </template>
 
 <script setup>
-import { onMounted, ref } from "vue";
-import { loginAPI } from "@/api/auth";
+import { ref } from "vue";
 import { regularInputs } from "@/assets/inputs";
-import { useRouter } from "vue-router";
+
+import CloudflareTurnstile from "@/library/cloudflare-turnstile.vue";
+import { useAuthStore } from "@/stores/auth.store";
 
 import Logo from "@/assets/icons/logo.vue";
-import CloudflareTurnstile from "@/library/cloudflare-turnstile.vue";
-import { useCloudflareTurnstile } from "@/stores/turnstile.js";
+import LoadingIcon from '@/assets/icons/loading.vue'
 
-const router = useRouter();
-const cloudflareTurnstile = useCloudflareTurnstile();
+const authStore = useAuthStore();
 
 const email = ref("daniela@gmail.com");
 const password = ref("danika123.");
@@ -53,25 +60,15 @@ const loading = ref(false);
 
 const loginHandler = async () => {
     loading.value = true;
-    const token = await cloudflareTurnstile.getTurnstileToken();
-    try {
-        const response = await loginAPI({
+    try{
+        await authStore.loginUser({
             email: email.value,
-            password: password.value,
-            token,
-        });
-        console.log("response.success: ", response.success);
-        if (response.success) {
-            router.push({ path: "/" });
-        }
-
-        return response;
+            password: password.value
+        })
     } catch (err) {
-        const error = err;
-        console.error("error: ", error);
-        loading.value = false;
+        throw err
     } finally {
-        loading.value = false;
+        loading.value = false
     }
 };
 </script>

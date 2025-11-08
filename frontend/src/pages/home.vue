@@ -10,5 +10,4 @@
 </template>
 
 <script setup>
-import Logo from '@/assets/icons/logo.vue'
 </script>

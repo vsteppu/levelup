@@ -6,7 +6,7 @@ import { setJWT } from "../utils/jwt-token.js"
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
+router.post("/profile", async (req, res) => {
     const { email, password, token } = req.body;
 
     try {

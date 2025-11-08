@@ -1,13 +1,13 @@
-import Dashboard from '@/pages/auth/dashboard.vue'
+import Home from '@/pages/home.vue'
 import LoginPage from '@/pages/auth/login.vue'
 import RegisterPage from '@/pages/auth/register.vue'
 
 const routes = [
     {
         path: '/', 
-        component: Dashboard,
-        name: 'dashboard',
-        meta: { requiresAuth: false }
+        component: Home,
+        name: 'home',
+        meta: { requiresAuth: true }
     },
     { 
         path: '/login', 

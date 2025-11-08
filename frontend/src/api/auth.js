@@ -1,7 +1,8 @@
 import axios from "axios";
+import { useAuthState } from '@/composables/auth.js'
 
-const api = '/api'
-//const api = import.meta.env.VITE_API_URL;
+const api = import.meta.env.VITE_API_URL || '/api'
+const { setUser } = useAuthState()
 
 const registerAPI = async (user) => {
     const response = await axios.post(`${api}/register`, user)
@@ -9,8 +10,10 @@ const registerAPI = async (user) => {
 }
 
 const loginAPI = async (user) => {
-    console.log('user: ', user);
     const response = await axios.post(`${api}/login`, user)
+    if (response?.data?.success) { 
+        setUser(response?.data)
+    }
     return response?.data
 }
 
