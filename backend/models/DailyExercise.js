@@ -4,25 +4,19 @@ import sequelize from '../config/db.js'
 const DailyExercise = sequelize.define(
     'DailyExercise',
     {
-        push_ups: {
-            type: DataTypes.INTEGER,
+        user_id: {
+            type: DataTypes.STRING,
             allowNull: false,
             defaultValue: 0,
         },
-        squats: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
-        },
-        sit_ups: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
-        },
-        running: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
-            defaultValue: 0,
+        exercises: {
+            type: DataTypes.JSON,
+            defaultValue: [
+                { name: 'push_ups', value: 0, display_name: 'Push ups' },
+                { name: 'sit_ups', value: 0, display_name: 'Sit ups' },
+                { name: 'squats', value: 0, display_name: 'Squats' },
+                { name: 'running', value: 0, display_name: 'Running' },
+            ]
         }
     },
     {

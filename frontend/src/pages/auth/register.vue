@@ -57,6 +57,16 @@
                     Register
                 </p>
             </button>
+            <router-link 
+                :to="{name: 'login'}"
+                class="text-blue-dark font-light hover:underline text-center"
+            >
+                Go to Login
+            </router-link>
+            <span class="font-light text-sm text-center mx-auto">
+                By creating an account, you agree to our Terms of Use
+                and Privacy Policy.
+            </span>
         </div>
     </div>
 </template>

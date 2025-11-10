@@ -1,6 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
 import cors from "cors"
+import cookieParser from "cookie-parser"
 
 import sequelize from "./config/db.js"
 import getUser from "./routes/user.js"
@@ -22,10 +23,10 @@ app.use(
 app.use(cookieParser())
 app.use(express.json());
 
-sequelize
-    .sync({ alter: true })
-    .then(() => console.log("✅ Database synced"))
-    .catch((err) => console.error("❌ Error syncing DB:", err));
+//sequelize
+//    .sync({ alter: true }) // DON't USE { force: true }
+//    .then(() => console.log("✅ DB synced"))
+//    .catch((err) => console.error("❌ Error syncing DB:", err));
 
 app.post("/user", getUser);
 app.post("/register", registerUser);

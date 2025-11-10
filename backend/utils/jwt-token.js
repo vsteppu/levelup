@@ -1,8 +1,6 @@
 import cookieParser from 'cookie-parser'
 import jwt from 'jsonwebtoken'
-
-const app = express()
-
+import expressJWT from 'express-jwt'
 
 // login
 export const setJWT = (req, res) => {
@@ -13,7 +11,7 @@ export const setJWT = (req, res) => {
     httpOnly: true,       // cant be accessed with JS
     secure: true,         // only through HTTPS
     sameSite: 'strict',   // prevent sending through sites
-    maxAge: 3600000,      // 1 hour
+    maxAge: 60 * 1000,      // 1 hour
   })
 
   res.json({ success: true, message: 'User logged in' })

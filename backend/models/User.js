@@ -16,7 +16,6 @@ const User = sequelize.define(
         email: {
             type: DataTypes.STRING,
             allowNull: false,
-            unique: true,
         },
         password: {
             type: DataTypes.STRING,
@@ -24,12 +23,12 @@ const User = sequelize.define(
         },
         daily_exercise: {
             type: DataTypes.JSON,
-            defaultValue: {
-                push_ups: 0,
-                sit_ups: 0,
-                squats: 0,
-                running: 0,
-            }
+            defaultValue: [
+                { name: 'push_ups', value: 0, display_name: 'Push ups' },
+                { name: 'sit_ups', value: 0, display_name: 'Sit ups' },
+                { name: 'squats', value: 0, display_name: 'Squats' },
+                { name: 'running', value: 0, display_name: 'Running' },
+            ]
         },
     },
     {
@@ -37,6 +36,9 @@ const User = sequelize.define(
         timestamps: true,
         paranoid: true,
         underscored: true,
+        createdAt: 'created_at',
+        updatedAt: 'updated_at',
+        deletedAt: 'deleted_at',
     }
 );
 

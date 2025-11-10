@@ -8,7 +8,9 @@ import { useRouter } from "vue-router";
 export const useAuthStore = defineStore('authStore',()=>{
     const cloudflareTurnstile = useCloudflareTurnstile()
     const router = useRouter()
-    const { isAuthenticated } = useAuthState()
+    const { getUser, isAuthenticated } = useAuthState()
+
+    const user = ref(getUser() || null)
     
     const authenticated = ref(isAuthenticated() || false)
 
@@ -21,13 +23,14 @@ export const useAuthStore = defineStore('authStore',()=>{
         return response;
     }
 
-    const loginUser = async (user) => {
+    const loginUser = async (data) => {
         const token = await cloudflareTurnstile.getTurnstileToken();
-        const { email, password } = user
+        const { email, password } = data
 
         const response = await loginAPI({ email, password, token });
         if (response.success) {
             authenticated.value = true
+            user.value = response?.user
             router.push({ path: "/" })
         }
         return response;
@@ -40,6 +43,7 @@ export const useAuthStore = defineStore('authStore',()=>{
     }
 
     return {
+        user,
         authenticated,
         loginUser,
         registerUser,

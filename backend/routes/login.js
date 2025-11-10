@@ -13,7 +13,6 @@ router.post("/login", async (req, res) => {
         const existingUser = await loginController({ email, password })
         const tokenValidated = await authTokenValidation(token)
 
-
         if (!tokenValidated.success) {
             return res.status(403).json({
                 success: false,

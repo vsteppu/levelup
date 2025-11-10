@@ -35,9 +35,15 @@
                 <p v-else 
                     class="my-3"
                 >
-                    LOGIN
+                    Login
                 </p>
             </button>
+            <router-link 
+                :to="{name: 'register'}"
+                class="mx-auto text-blue-dark hover:underline"
+            >
+                Go to Register
+            </router-link>
         </div>
     </div>
 </template>
@@ -48,14 +54,15 @@ import { regularInputs } from "@/assets/inputs";
 
 import CloudflareTurnstile from "@/library/cloudflare-turnstile.vue";
 import { useAuthStore } from "@/stores/auth.store";
+import { useRouter } from "vue-router";
 
 import Logo from "@/assets/icons/logo.vue";
 import LoadingIcon from '@/assets/icons/loading.vue'
 
 const authStore = useAuthStore();
 
-const email = ref("daniela@gmail.com");
-const password = ref("danika123.");
+const email = ref("vurado@gmail.com");
+const password = ref("123456Aa.");
 const loading = ref(false);
 
 const loginHandler = async () => {
